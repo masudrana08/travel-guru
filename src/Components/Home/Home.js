@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import Header from '../Header/Header';
 import TravelSection from '../TravelSection/TravelSection';
 import './Home.css'
@@ -18,8 +18,7 @@ const Home = () => {
     return (
         <MyContext.Provider value={[showArea,setShowArea]}>
             <div className="home-container" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${showArea.img})`,  height:"100vh", backgroundSize:"cover"}}>
-
-            <Header></Header>
+            <Header color="white"></Header>
             <TravelSection></TravelSection>
 
 </div>

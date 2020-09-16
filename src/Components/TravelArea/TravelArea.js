@@ -1,3 +1,4 @@
+import { Grid } from "@material-ui/core";
 import React, { useContext } from "react";
 import { MyContext } from "../Home/Home";
 
@@ -13,18 +14,20 @@ const TravelArea = (props) => {
     backgroundPosition: "right top",
     backgroundRepeat: "no-repeat",
     backgroundOrigin: "border-box",
-    width: "215px",
+    width: "98%",
     border:"3px solid #ff9100",
     borderRadius:"10px",
-    marginRight:"2px"
+    margin:"2px"
   };
   
   return (
-    <div onClick={() => setShowArea(props.place)} style={backgroundImageStyle}>
+    <Grid item xs={12} md={4}>
+      <div onClick={() => setShowArea(props.place)} style={backgroundImageStyle}>
       <h2 style={{ marginTop: "250px", textAlign: "center", color: "white" }}>
         {title}
       </h2>
     </div>
+    </Grid>
   );
 };
 
