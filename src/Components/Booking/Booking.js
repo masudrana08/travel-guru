@@ -1,12 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Header from '../Header/Header';
 import logo from '../../images/Logo.png'
 import { MyContext } from '../../App';
 import { Button, FormGroup, Grid } from '@material-ui/core';
 import './Booking.css'
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css"
 const Booking = () => {
     const [showArea]=useContext(MyContext)
-    console.log(showArea)
+    const [from,setFrom]=useState(null)
+    const [to,setTo]=useState(null)
     return (
         <div style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${showArea.img})`,  height:"100vh", backgroundSize:"cover", padding:"0 30px"}}>
 
@@ -23,23 +26,23 @@ const Booking = () => {
                     <form className="booking-form" style={{padding:"30px"}}>
                         <FormGroup className="form-group" >
                             <label htmlFor="origin">Origin</label>
-                            <input id="origin" type="text"/>
+                            <input id="origin" type="text" required/>
 
                             <label htmlFor="origin">Destination</label>
-                            <input id="origin" type="text"/>
+                            <input id="origin" type="text" required/>
 
                             <div style={{display:"flex"}}>
                                 <div>
-                                    <label htmlFor="origin">Form</label>
-                                    <input id="origin" type="text"/>
+                                    <label htmlFor="origin">From</label>
+                                    <DatePicker selected={from} onChange={date => setFrom(date)} required></DatePicker>
                                 </div>
 
                                 <div>
                                     <label htmlFor="origin">To</label>
-                                    <input id="origin" type="text"/>
+                                    <DatePicker selected={to} onChange={date => setTo(date)}required></DatePicker>
                                 </div>
                             </div>
-                            <Button  style={{background:"orange", marginTop:"10px"}}>Start Booking</Button>
+                                <input type="submit" value="Start Booking"/>   
                         </FormGroup>
                     </form>
                 </Grid>

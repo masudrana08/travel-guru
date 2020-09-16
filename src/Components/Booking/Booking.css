@@ -16,8 +16,11 @@
 .form-group input:focus{
     border:1px solid orange;
 }
-.form-group input[type]{
-    
+.form-group input[type="submit"]{
+    background:orange;
+    font-weight:bold;
+    color:rgb(37, 37, 37);
+    margin-top:10px
 }
 .form-group label{
     margin-bottom:5px;
