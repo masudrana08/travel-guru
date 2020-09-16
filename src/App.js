@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import './App.css';
 import Home from './Components/Home/Home';
 
+export const MyContext=createContext()
 function App() {
+  const [backgroundImg, setBackgroundImg]=useState("https://i.ibb.co/p1Fm5yD/coxsbazar.png")
+
   return (
-    <div>
+    <MyContext.Provider value={[backgroundImg,setBackgroundImg]}>
       <Home></Home>
-    </div>
+    </MyContext.Provider>
   );
 }
 

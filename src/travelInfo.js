@@ -1,12 +1,12 @@
-https://i.ibb.co/p1Fm5yD/coxsbazar.png
-https://i.ibb.co/pn1Pqr2/hotel2.png
-https://i.ibb.co/Ttq3ZCq/hotel3.png
-https://i.ibb.co/QvD0nVJ/hotel1.png
-https://i.ibb.co/P9sLmbR/sajek.jpg
-https://i.ibb.co/ZSDZQPB/sreemongol.jpg
-https://i.ibb.co/mSBp1M0/sundarban.jpg
+// https://i.ibb.co/p1Fm5yD/coxsbazar.png
+// https://i.ibb.co/pn1Pqr2/hotel2.png
+// https://i.ibb.co/Ttq3ZCq/hotel3.png
+// https://i.ibb.co/QvD0nVJ/hotel1.png
+// https://i.ibb.co/P9sLmbR/sajek.jpg
+// https://i.ibb.co/ZSDZQPB/sreemongol.jpg
+// https://i.ibb.co/mSBp1M0/sundarban.jpg
 
-const touristPlace=[
+export const touristPlaces=[
     {
         id:1,
         title:"Cox's Bazar",
@@ -31,7 +31,7 @@ const touristPlace=[
 
 ]
 
-const hotelInfo=[
+export const hotelsInfo=[
     {
         id:1,
         title:"Light bright airy stylish apt and safe peaceful stay",

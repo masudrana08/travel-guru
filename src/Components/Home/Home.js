@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { MyContext } from '../../App';
 import Header from '../Header/Header';
-import coxsbazar from '../../images/image/coxsbazar.png'
+import TravelSection from '../TravelSection/TravelSection';
+import './Home.css'
 const Home = () => {
-    const [choosenBackground, setChoosenBackground]=useState(coxsbazar)
+    const [backgroundImg]=useContext(MyContext)
+
+
     return (
-        <div style={{backgroundImage: `url(${choosenBackground})`}}>
+        <div style={{backgroundImage: `url(${backgroundImg})`,  height:"100vh", backgroundSize:"cover"}}>
+
             <Header></Header>
+            <TravelSection></TravelSection>
+            
         </div>
     );
 };
