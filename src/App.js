@@ -6,8 +6,12 @@ import Booking from './Components/Booking/Booking';
 import Hotels from './Components/Hotels/Hotels';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import Auth from './Components/Auth/Auth';
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import firebaseConfig from './firebase.config'
 
 export const MyContext=createContext()
+firebase.initializeApp(firebaseConfig);
 function App() {
 
   const [showArea,setShowArea]=useState(
@@ -19,9 +23,10 @@ function App() {
   }
   )
 
-  
+  const [loggedIn,setLoggedIn]=useState(true)
+
   return (
-    <MyContext.Provider value={[showArea,setShowArea]}>
+    <MyContext.Provider value={[showArea,setShowArea,loggedIn,setLoggedIn]}>
     <Router>
       <Switch>
 

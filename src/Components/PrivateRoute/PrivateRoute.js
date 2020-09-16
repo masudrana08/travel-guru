@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Redirect, Route, useLocation } from 'react-router-dom';
+import { MyContext } from '../../App';
 
 const PrivateRoute = ({children,...rest}) => {
-    const loggedIn=localStorage.getItem("loggedIn") 
+    const [showArea,setShowArea,loggedIn,setLoggedIn]=useContext(MyContext) 
     const location=useLocation()
     return (
         
@@ -13,7 +14,7 @@ const PrivateRoute = ({children,...rest}) => {
             : (
                 <Redirect to={
                     {pathname:"/auth",
-                        state:{from:location}
+                        location
                     }
                 }
                 />
