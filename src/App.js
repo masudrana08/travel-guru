@@ -19,8 +19,7 @@ function App() {
   }
   )
 
-
-
+  
   return (
     <MyContext.Provider value={[showArea,setShowArea]}>
     <Router>

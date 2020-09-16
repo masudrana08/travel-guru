@@ -1,11 +1,15 @@
 import { FormGroup } from '@material-ui/core';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import "./Auth.css"
 import Header from '../Header/Header'
 import logoBlack from '../../images/Logo-black.png'
 import fb from '../../images/icon/fb.png'
 import google from '../../images/icon/google.png'
+import { MyContext } from '../../App';
 const Auth = () => {
+    const [isSignedUp, setisSignedUp]=useState(false)
+    
+    
     return (
         <div>
             <Header img={logoBlack}></Header>
@@ -13,16 +17,39 @@ const Auth = () => {
             <form className="form-group auth-form-group">
                 
                 <FormGroup>
-                <h2 style={{textAlign:"left"}}>Create an account</h2>
-                    <input type="text" placeholder="First name"/>
-                    <input type="text" placeholder="Last name"/>
+                {
+                    isSignedUp? <h2 style={{textAlign:"left"}}>Login</h2>
+                    : <h2 style={{textAlign:"left"}}>Create an account</h2>
+                }
+                    {
+                        !isSignedUp && <>
+                            <input type="text" placeholder="First name"/>
+                            <input type="text" placeholder="Last name"/>
+                        </> 
+                    }
                     <input type="email" placeholder="Username and Email"/>
                     <input type="password" placeholder="Password"/>
-                    <input type="password" placeholder="Confirm Password"/>
-                    <input type="submit" value="Signup"/>
+                    {
+                        !isSignedUp && <input type="password" placeholder="Confirm Password"/>
+                    }
+                    {
+                        isSignedUp ? <input type="submit" value="Signin"/>
+                        : <input type="submit" value="Signup"/>
+                    }
                 </FormGroup>
                 
-                    <span>Already have an account? </span><span style={{color:"orange"}}>Login</span> 
+                    {
+                        isSignedUp ?<>
+                        <span>Don't have an account? </span>
+                        <span onClick={()=>setisSignedUp(false)} style={{color:"orange",cursor:"pointer"}}>Signup</span>
+                    </>
+                        
+                        :<>
+                        <span>Already have an account? </span>
+                        <span onClick={()=>setisSignedUp(true)} style={{color:"orange",cursor:"pointer"}}>Login</span>
+                        </>
+                        
+                    } 
             </form>
            <div style={{width:"300px", margin:"auto"}}>
             <p style={{textAlign:"center"}}>---------- Or -----------</p>
