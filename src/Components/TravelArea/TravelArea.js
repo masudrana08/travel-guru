@@ -1,15 +1,29 @@
 import React, { useContext } from "react";
-import { MyContext } from "../../App";
+import { MyContext } from "../Home/Home";
+
+
 
 const TravelArea = (props) => {
-  const [backgroundImage, setBackgroundImg] = useContext(MyContext);
+  const [showArea,setShowArea] = useContext(MyContext);
   const { title, description, img } = props.place;
+
+  const backgroundImageStyle = {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), url(${img})`,
+    backgroundSize: "cover",
+    backgroundPosition: "right top",
+    backgroundRepeat: "no-repeat",
+    backgroundOrigin: "border-box",
+    width: "215px",
+    border:"3px solid #ff9100",
+    borderRadius:"10px",
+    marginRight:"2px"
+  };
+  
   return (
-    <div
-      onClick={() => setBackgroundImg(img)}
-      style={{ backgroundImage: `url(${img})`, backgroundSize:"cover", backgroundPosition:"right top",backgroundRepeat:"no-repeat",backgroundOrigin:"border-box", width:"220px" }}
-    >
-      <h2 style={{ marginTop: "250px", textAlign:"center", color:"white" }}>{title}</h2>
+    <div onClick={() => setShowArea(props.place)} style={backgroundImageStyle}>
+      <h2 style={{ marginTop: "250px", textAlign: "center", color: "white" }}>
+        {title}
+      </h2>
     </div>
   );
 };
