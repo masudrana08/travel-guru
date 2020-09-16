@@ -3,11 +3,14 @@ import './App.css';
 import Home from './Components/Home/Home';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Booking from './Components/Booking/Booking';
+import Hotels from './Components/Hotels/Hotels';
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import Auth from './Components/Auth/Auth';
 
 export const MyContext=createContext()
 function App() {
 
-  const [showArea,setShowArea ]=useState(
+  const [showArea,setShowArea]=useState(
     {
       id:1,
       title:"Cox's Bazar",
@@ -30,6 +33,14 @@ function App() {
         <Route path="/booking">
           <Booking></Booking>
         </Route>
+
+        <Route path="/auth">
+          <Auth></Auth>
+        </Route>
+
+        <PrivateRoute path="/see-hotel">
+          <Hotels></Hotels>
+        </PrivateRoute>
 
       </Switch>
     </Router>
