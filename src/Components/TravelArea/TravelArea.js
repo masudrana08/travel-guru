@@ -1,6 +1,6 @@
 import { Grid } from "@material-ui/core";
 import React, { useContext } from "react";
-import { MyContext } from "../Home/Home";
+import { MyContext } from "../../App";
 
 
 

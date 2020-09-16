@@ -1,11 +1,12 @@
 import { Button, Grid } from "@material-ui/core";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { MyContext } from "../../App";
 import { touristPlaces } from "../../travelInfo";
-import { MyContext } from "../Home/Home";
+
 import TravelArea from "../TravelArea/TravelArea";
 const TravelSection = () => {
-  const [showArea] = useContext(MyContext);
+  const [showArea,setShowArea] = useContext(MyContext);
   return (
     <Grid container item xs={12} justify="space-between">
       <Grid item md={6} style={{ padding: "20px 9%", textAlign:"center" }}>
