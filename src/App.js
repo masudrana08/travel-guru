@@ -9,7 +9,10 @@ import Auth from './Components/Auth/Auth';
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config'
-
+import News from './Components/News/News'
+import Blog from './Components/Blog/Blog';
+import Contact from './Components/Contact/Contact';
+import Destination from './Components/Destination/Destination';
 export const MyContext=createContext()
 firebase.initializeApp(firebaseConfig);
 function App() {
@@ -23,7 +26,7 @@ function App() {
   }
   )
 
-  const [loggedIn,setLoggedIn]=useState(true)
+  const [loggedIn,setLoggedIn]=useState(false)
 
   return (
     <MyContext.Provider value={[showArea,setShowArea,loggedIn,setLoggedIn]}>
@@ -46,6 +49,21 @@ function App() {
           <Hotels></Hotels>
         </PrivateRoute>
 
+        <Route path="/news">
+          <News></News>
+        </Route>
+
+        <Route path="/blog">
+          <Blog></Blog>
+        </Route>
+
+        <Route path="/contact">
+          <Contact></Contact>
+        </Route>
+
+        <Route path="/destination">
+          <Destination></Destination>
+        </Route>
       </Switch>
     </Router>
     </MyContext.Provider>

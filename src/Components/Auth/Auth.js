@@ -48,7 +48,7 @@ const Auth = () => {
         firebase.auth().signInWithPopup(provider)
         .then(res=>{
             setLoggedIn(true)
-            history.replace(location)
+            history.replace(location || '/')
         })
         .catch(err=>{
             console.log(err)
@@ -69,7 +69,7 @@ const Auth = () => {
     
     return (
         <div>
-            <Header img={logoBlack}></Header>
+            <Header color="black" img={logoBlack}></Header>
             
             <form onSubmit={formHandler} className="form-group auth-form-group">
                 

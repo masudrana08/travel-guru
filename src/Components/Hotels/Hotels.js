@@ -5,10 +5,11 @@ import { Grid } from '@material-ui/core';
 
 import {hotelsInfo} from '../../travelInfo'
 import HotelDetails from '../HotelDetails/HotelDetails';
+import Map from '../Map/Map';
 const Hotels = () => {
     return (
         <div>
-           <Header img={blackLogo}></Header>
+           <Header color="black" img={blackLogo}></Header>
 
            <Grid container item xs={12} justify="space-between">
 
@@ -23,7 +24,7 @@ const Hotels = () => {
                </Grid>
 
                <Grid item xs={12} md={6}>
-                a
+                <Map></Map>
                </Grid>
            </Grid>
         </div>

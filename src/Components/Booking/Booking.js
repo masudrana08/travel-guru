@@ -22,15 +22,15 @@ const Booking = () => {
 
             <Header img={logo} color="white"></Header>
             
-            <Grid container item xs={12} justify="space-around" style={{color:"white", textAlign:"center"}}> 
+            <Grid container item xs={12} style={{color:"white",  marginTop:"40px"}}> 
 
-                <Grid item xs={12} md={6} style={{padding:"0 9%"}}>
+                <Grid item xs={12} md={6}  style={{padding:"0 9%"}}>
                     <h1 style={{fontSize:"60px"}}>{showArea.title}</h1>
                     <h5 style={{fontWeight:"500"}}>{showArea.description}</h5>
                 </Grid>
 
-                <Grid item xs={12} md={6} style={{padding:"70px 8%"}}>
-                    <form className="booking-form" style={{padding:"30px"}} onSubmit={formControler}>
+                <Grid item xs={12} md={6} >
+                    <form className="booking-form" style={{padding:"7%", margin:"auto",marginTop:"50px", width:"340px"}} onSubmit={formControler}>
                         <FormGroup className="form-group" >
                             <label htmlFor="origin">Origin</label>
                             <input id="origin" type="text" required/>
@@ -38,14 +38,14 @@ const Booking = () => {
                             <label htmlFor="origin">Destination</label>
                             <input id="origin" type="text" required/>
 
-                            <div style={{display:"flex"}}>
+                            <div className="datepicker-section" style={{display:"flex"}}>
                                 <div>
-                                    <label htmlFor="origin">From</label>
+                                    <p>From</p>
                                     <DatePicker selected={from} onChange={date => setFrom(date)} required></DatePicker>
                                 </div>
 
-                                <div>
-                                    <label htmlFor="origin">To</label>
+                                <div >
+                                    <p>To</p>
                                     <DatePicker selected={to} onChange={date => setTo(date)}required></DatePicker>
                                 </div>
                             </div>
