@@ -26,7 +26,7 @@ function App() {
   }
   )
 
-  const [loggedIn,setLoggedIn]=useState(true)
+  const [loggedIn,setLoggedIn]=useState(false)
   const [name, setName]=useState("user")
   return (
     <MyContext.Provider value={[showArea,setShowArea,loggedIn,setLoggedIn,name, setName]}>

@@ -10,6 +10,7 @@ import { MyContext } from '../../App';
 import { useHistory, useLocation } from 'react-router-dom';
 const Auth = () => {
     const [showArea,setShowArea,loggedIn,setLoggedIn,name, setName]=useContext(MyContext)
+    const [confirmationError, setConfirmationError]=useState(false)
 
     const [isSignedUp, setisSignedUp]=useState(false)
     const [submiter, setSubmiter]=useState("")
@@ -27,14 +28,14 @@ const Auth = () => {
                 user.password==user.confirmationPassword ?
                 firebase.auth().createUserWithEmailAndPassword(user.email,user.password)
                 .then(res=>{
-                setUser({...user,confirmationError:false})
-
+                setConfirmationError(false)
+                setUser({...user, signupError:""})
                     setisSignedUp(true)
                 })
                 .catch(err=>{
-                    console.log(err)
+                    setUser({...user, signupError:err.message})
                 })
-                : setUser({...user,confirmationError:true})
+                : setConfirmationError(true)
         
             }
         
@@ -43,12 +44,13 @@ const Auth = () => {
         submiter === "signin" &&
         firebase.auth().signInWithEmailAndPassword(user.email,user.password)
         .then(res=>{
-            
+            const currentUser = firebase.auth().currentUser;
+            setName(currentUser.displayName)
             setLoggedIn(true)
             history.replace(location || "/")
         })
         .catch(err=>{
-            console.log(err.message)
+            setUser({...user, signinError:err.message})
         })
         
     }
@@ -63,7 +65,7 @@ const Auth = () => {
             history.replace(location || '/')
         })
         .catch(err=>{
-            console.log(err)
+            setUser({...user, signinError:err.message})
         })
     }
 
@@ -71,12 +73,25 @@ const Auth = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithPopup(provider)
         .then(res=>{
+            const currentUser = firebase.auth().currentUser;
+            setName(currentUser.displayName)
             setLoggedIn(true)
             history.replace(location || '/')
         })
         .catch(err=>{
-            console.log(err)
+            setUser({...user, signinError:err.message})
         })
+    }
+
+    const loginToggleHandler=()=>{
+        setisSignedUp(true)
+        setConfirmationError(false)
+        
+        setUser({...user, signupError:""})
+    }
+    const signupToggleHandler=()=>{
+        setisSignedUp(false)
+        setUser({...user, signinError:""})
     }
     
     return (
@@ -121,9 +136,17 @@ const Auth = () => {
                     </div>
                     }
 
-
                     {
-                        user.confirmationError && <p style={{color:"red", fontSize:"13px"}}>Doesn't match your password</p>
+                        user.signinError ? <p style={{color:"red", fontSize:"13px"}}>{user.signinError}</p>
+                        : ""
+                    }
+                    {
+                         user.signupError ? <p style={{color:"red", fontSize:"13px"}}>{user.signupError}</p>
+                         : ""
+                    }
+                    {
+                        confirmationError ? <p style={{color:"red", fontSize:"13px"}}>Doesn't match your password</p>
+                        : ""
                     }
                     {
                         isSignedUp ? <input name="signin" onClick={(event)=>setSubmiter(event.target.name)} type="submit" value="Signin"/>
@@ -134,12 +157,12 @@ const Auth = () => {
                     {
                         isSignedUp ?<>
                         <span>Don't have an account? </span>
-                        <span onClick={()=>setisSignedUp(false)} style={{color:"orange",cursor:"pointer"}}>Signup</span>
+                        <span onClick={signupToggleHandler} style={{color:"orange",cursor:"pointer"}}>Signup</span>
                     </>
                         
                         :<>
                         <span>Already have an account? </span>
-                        <span onClick={()=>setisSignedUp(true)} style={{color:"orange",cursor:"pointer"}}>Login</span>
+                        <span onClick={loginToggleHandler} style={{color:"orange",cursor:"pointer"}}>Login</span>
                         </>
                         
                     } 
