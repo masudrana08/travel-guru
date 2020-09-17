@@ -26,10 +26,10 @@ function App() {
   }
   )
 
-  const [loggedIn,setLoggedIn]=useState(false)
-
+  const [loggedIn,setLoggedIn]=useState(true)
+  const [name, setName]=useState("user")
   return (
-    <MyContext.Provider value={[showArea,setShowArea,loggedIn,setLoggedIn]}>
+    <MyContext.Provider value={[showArea,setShowArea,loggedIn,setLoggedIn,name, setName]}>
     <Router>
       <Switch>
 

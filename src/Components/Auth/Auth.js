@@ -9,7 +9,7 @@ import * as firebase from "firebase/app";
 import { MyContext } from '../../App';
 import { useHistory, useLocation } from 'react-router-dom';
 const Auth = () => {
-    const [showArea,setShowArea,loggedIn,setLoggedIn]=useContext(MyContext)
+    const [showArea,setShowArea,loggedIn,setLoggedIn,name, setName]=useContext(MyContext)
 
     const [isSignedUp, setisSignedUp]=useState(false)
     const [submiter, setSubmiter]=useState("")
@@ -21,21 +21,31 @@ const Auth = () => {
     const formHandler=(event)=>{
         event.preventDefault()
         
-        submiter === "signup" &&
-        firebase.auth().createUserWithEmailAndPassword(user.email,user.password)
-        .then(res=>{
-            console.log(res)
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+        
+            if(submiter === "signup") {
+            
+                user.password==user.confirmationPassword ?
+                firebase.auth().createUserWithEmailAndPassword(user.email,user.password)
+                .then(res=>{
+                setUser({...user,confirmationError:false})
 
+                    setisSignedUp(true)
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+                : setUser({...user,confirmationError:true})
+        
+            }
+        
+    
 
         submiter === "signin" &&
         firebase.auth().signInWithEmailAndPassword(user.email,user.password)
         .then(res=>{
+            
             setLoggedIn(true)
-            history.replace(location)
+            history.replace(location || "/")
         })
         .catch(err=>{
             console.log(err.message)
@@ -47,6 +57,8 @@ const Auth = () => {
         const provider = new firebase.auth.FacebookAuthProvider();
         firebase.auth().signInWithPopup(provider)
         .then(res=>{
+            const currentUser = firebase.auth().currentUser;
+            setName(currentUser.displayName)
             setLoggedIn(true)
             history.replace(location || '/')
         })
@@ -69,7 +81,7 @@ const Auth = () => {
     
     return (
         <div>
-            <Header color="black" img={logoBlack}></Header>
+            <Header  color="black" img={logoBlack}></Header>
             
             <form onSubmit={formHandler} className="form-group auth-form-group">
                 
@@ -91,10 +103,27 @@ const Auth = () => {
                     <input onBlur={(event)=>setUser({...user,email:event.target.value})} type="email" placeholder="Email address" required/>
 
                     <input onBlur={(event)=>setUser({...user,password:event.target.value})} type="password" placeholder="Password" required/>
+
+
                     {
                         !isSignedUp && <input
                         onBlur={(event)=>setUser({...user,confirmationPassword:event.target.value})}
                          type="password" placeholder="Confirm Password" required/>
+                    }
+
+
+                    {
+                        isSignedUp && <div style={{display:"flex", justifyContent:"space-between", fontSize:"13px", fontWeight:"500"}}>
+                        <div style={{display:"flex", alignItems:"center"}}>
+                            <input id="checkbox"  type="Checkbox" /><label for="checkbox" style={{marginBottom:"6px"}}>Remember me</label>
+                        </div>
+                        <p style={{color:"orange", cursor:"pointer"}}>Fogot Password</p>
+                    </div>
+                    }
+
+
+                    {
+                        user.confirmationError && <p style={{color:"red", fontSize:"13px"}}>Doesn't match your password</p>
                     }
                     {
                         isSignedUp ? <input name="signin" onClick={(event)=>setSubmiter(event.target.name)} type="submit" value="Signin"/>

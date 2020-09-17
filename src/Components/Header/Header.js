@@ -6,7 +6,7 @@ import logo from '../../images/Logo.png'
 import './Header.css'
 
 const Header = (props) => {
-    const [showArea,setShowArea,loggedIn]=useContext(MyContext)
+    const [showArea,setShowArea,loggedIn,setLoggedIn,name]=useContext(MyContext)
     return (
         <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", color:`${props.color}`, height:'50px'   }}>
            <div>
@@ -37,7 +37,7 @@ const Header = (props) => {
                 
                 
                 {
-                    loggedIn?  <h4 ><span style={{color:"orange"}}>||</span> Hello, User</h4>
+                    loggedIn?  <h4 ><span style={{color:"orange"}}>||</span> Hello, {name}</h4>
                     : <>
                         <Link style={{textDecoration:"none", color:"white"}} to="/auth">
                             <Button size="small" style={{background:"orange", color:"white"}}>Login</Button>

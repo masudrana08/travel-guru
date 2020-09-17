@@ -11,9 +11,13 @@ const Hotels = () => {
         <div>
            <Header color="black" img={blackLogo}></Header>
 
-           <Grid container item xs={12} justify="space-between">
+           <Grid container item xs={12} justify="space-between" style={{marginTop:"30px"}}>
 
                <Grid item xs={12} md={6}>
+                   <div style={{marginLeft:"15px"}}>
+                        <b style={{color:"grey"}}>252 Stays Sep 17-20</b>
+                        <h3 style={{margin:0}}>Stay in Cox's Bazar</h3>
+                   </div>
                 {
                     hotelsInfo.map(hotel=>{
                         return (
