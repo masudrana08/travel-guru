@@ -18,7 +18,7 @@ export const MyContext=createContext()
 firebase.initializeApp(firebaseConfig);
 
 
-// ------------ Started App -------------- //
+//Started App
 function App() {
 
   const [showArea,setShowArea]=useState(
@@ -34,7 +34,7 @@ function App() {
   const [name, setName]=useState("user")
 
 
-// ------------ Return from App -------------- //
+// Return section of App 
   return (
     <MyContext.Provider value={[showArea,setShowArea,loggedIn,setLoggedIn,name, setName]}>
     <Router>
