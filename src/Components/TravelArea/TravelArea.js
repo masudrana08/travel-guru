@@ -4,6 +4,7 @@ import { MyContext } from "../../App";
 import './TravelArea.css'
 
 const TravelArea = (props) => {
+
   const [showArea,setShowArea] = useContext(MyContext);
   const { title, description, img } = props.place;
 
@@ -14,22 +15,26 @@ const TravelArea = (props) => {
     backgroundRepeat: "no-repeat",
     backgroundOrigin: "border-box",
     width: "98%",
-    
     borderRadius:"10px",
     margin:"2px"
-  };
+  }
   
   const travelAreaHandler=()=>{
     setShowArea(props.place)
   }
   
+  //Returned from Travel Component
   return (
+
     <Grid item xs={12} md={4}>
-      <div className="travel-area" onClick={travelAreaHandler} style={backgroundImageStyle}>
-      <h2 style={{ marginTop: "250px", textAlign: "center", color: "white" }}>
-        {title}
-      </h2>
-    </div>
+        <div className="travel-area" 
+            onClick={travelAreaHandler} 
+            style={backgroundImageStyle}>
+
+          <h2 style={{ marginTop: "250px", textAlign: "center", color: "white" }}>
+              {title}
+          </h2>
+        </div>
 
     </Grid>
   );
