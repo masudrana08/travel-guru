@@ -8,7 +8,7 @@ import HotelDetails from '../HotelDetails/HotelDetails';
 import Map from '../Map/Map';
 
 
-const Hotels = () => {
+const Destination = () => {
     return (
         <div>
            <Header color="black" img={blackLogo}></Header>
@@ -45,4 +45,4 @@ const Hotels = () => {
     );
 };
 
-export default Hotels;
+export default Destination;

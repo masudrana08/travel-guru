@@ -27,7 +27,7 @@ const Header = (props) => {
                 <Link style={{textDecoration:"none", color:`${props.color}`}} to="/news">
                     <p>News</p>
                 </Link>
-                <Link style={{textDecoration:"none", color:`${props.color}`}} to="/destination">
+                <Link style={{textDecoration:"none", color:`${props.color}`}} to="/booking/destination">
                     <p>Destination</p>
                 </Link>
                 <Link style={{textDecoration:"none", color:`${props.color}`}} to="/blog">

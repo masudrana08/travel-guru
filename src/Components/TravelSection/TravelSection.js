@@ -8,7 +8,7 @@ import TravelArea from "../TravelArea/TravelArea";
 const TravelSection = () => {
   const [showArea,setShowArea] = useContext(MyContext)
   return (
-    <Grid container item xs={12} justify="space-between" style={{paddingRight:"20px"}}>
+    <Grid container item xs={12} justify="space-between" style={{marginRight:"20px"}}>
       <Grid item md={6} style={{ padding: "20px 9%", textAlign:"center" }}>
 
         <h1 style={{ color: "white", fontSize: "60px" }}>

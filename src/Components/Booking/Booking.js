@@ -18,7 +18,7 @@ const Booking = () => {
 
     const formControler =(event)=>{
         event.preventDefault()
-        history.push("/see-hotel")
+        history.push("/booking/destination")
     }
 
 //Returned from Booking Component

@@ -3,7 +3,7 @@ import './App.css';
 import Home from './Components/Home/Home';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Booking from './Components/Booking/Booking';
-import Hotels from './Components/Hotels/Hotels';
+import Destination from './Components/Hotels/Hotels';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import Auth from './Components/Auth/Auth';
 import * as firebase from "firebase/app";
@@ -12,7 +12,6 @@ import firebaseConfig from './firebase.config'
 import News from './Components/News/News'
 import Blog from './Components/Blog/Blog';
 import Contact from './Components/Contact/Contact';
-import Destination from './Components/Destination/Destination';
 import NotFound from './Components/NotFound/NotFound';
 
 export const MyContext=createContext()
@@ -53,8 +52,8 @@ function App() {
           <Auth></Auth>
         </Route>
 
-        <PrivateRoute exact path="/booking/see-hotel">
-          <Hotels></Hotels>
+        <PrivateRoute exact path="/booking/destination">
+          <Destination></Destination>
         </PrivateRoute>
 
         <Route path="/news">
@@ -67,10 +66,6 @@ function App() {
 
         <Route path="/contact">
           <Contact></Contact>
-        </Route>
-
-        <Route path="/destination">
-          <Destination></Destination>
         </Route>
 
     {/* Not Found Route */}
