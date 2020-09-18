@@ -148,7 +148,7 @@ const Auth = () => {
                             <div style={{display:"flex", justifyContent:"space-between", fontSize:"13px", fontWeight:"500"}}>
                                 <div style={{display:"flex", alignItems:"center"}}>     
                                     <input id="checkbox" type="Checkbox" />
-                                    <label for="checkbox" style={{marginBottom:"6px"}}>
+                                    <label htmlFor="checkbox" style={{marginBottom:"6px"}}>
                                         Remember me
                                     </label>
                                 </div>
@@ -180,8 +180,11 @@ const Auth = () => {
                     {
                         isSignedUp ?
                         <input name="signin" type="submit" value="Signin" 
+                            style={{cursor:"pointer"}}
                             onClick={(event)=>setSubmiter(event.target.name)} />
+
                         : <input name="signup" type="submit" value="Signup"
+                            style={{cursor:"pointer"}}
                             onClick={(event)=>setSubmiter(event.target.name)} />
                     }
                 </FormGroup>

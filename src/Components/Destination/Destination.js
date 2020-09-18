@@ -29,7 +29,7 @@ const Destination = () => {
                 {
                     hotelsInfo.map(hotel=>{
                         return (
-                            <HotelDetails hotel={hotel}></HotelDetails>
+                            <HotelDetails key={hotel.id} hotel={hotel}></HotelDetails>
                         )
                     })
                 }

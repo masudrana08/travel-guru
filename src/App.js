@@ -3,7 +3,7 @@ import './App.css';
 import Home from './Components/Home/Home';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Booking from './Components/Booking/Booking';
-import Destination from './Components/Hotels/Hotels';
+import Destination from './Components/Destination/Destination';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import Auth from './Components/Auth/Auth';
 import * as firebase from "firebase/app";
