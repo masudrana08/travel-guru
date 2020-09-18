@@ -6,7 +6,7 @@ import { Button, FormGroup, Grid } from '@material-ui/core';
 import './Booking.css'
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 
 const Booking = () => {
@@ -81,7 +81,8 @@ const Booking = () => {
                                         placeholderText="Peek a date" />
                                 </div>
                             </div>
-                                <input type="submit" value="Start Booking"/>   
+                                <input type="submit" value="Start Booking"/>
+
                         </FormGroup>
                     </form>
                 </Grid>

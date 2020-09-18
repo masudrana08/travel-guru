@@ -26,6 +26,7 @@ const Auth = () => {
     
 
     const formHandler=(event)=>{
+
         event.preventDefault()
 //Signup with email and password
             if(submiter === "signup") {
@@ -40,8 +41,8 @@ const Auth = () => {
                     currentUser.updateProfile({
                     displayName: `${user.fname} ${user.lname}`
                     })
-
                     currentUser.sendEmailVerification()
+
                 })
                 .catch(err=>{
                     setUser({...user, signupError:err.message})
@@ -55,13 +56,19 @@ const Auth = () => {
 
         if(submiter == "signin"){
             setVerifyMessage(false)
-
+            setUser({...user, signinError:""})
                     firebase.auth().signInWithEmailAndPassword(user.email,user.password)
                     .then(res=>{
                         const currentUser = firebase.auth().currentUser;
                         setName(currentUser.displayName)
-                        setLoggedIn(true)
-                        history.replace(location || "/")
+                        if(currentUser.emailVerified){
+                            setLoggedIn(true)
+                            history.replace(location || "/" )
+                        }else{
+                            currentUser.sendEmailVerification()
+                            setVerified("false")
+                        }
+
                     })
                     .catch(err=>{
                         setUser({...user, signinError:err.message})
@@ -186,6 +193,14 @@ const Auth = () => {
                                 {user.signinError}
                             </p>
                         : ""
+                    }
+                    {
+                         verified &&
+                         verified==="false" &&
+                            <p style={{color:"red", fontSize:"13px"}}>
+                                Email Not verified ! Please check your mail.
+                            </p>
+
                     }
                     {
                          user.signupError ?
