@@ -12,8 +12,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 // Started Auth
 const Auth = () => {
-    const signedUpUser = firebase.auth().currentUser;
-
+    
     const [showArea,setShowArea,loggedIn,setLoggedIn,name, setName]=useContext(MyContext)
 
     const [confirmationError, setConfirmationError]=useState(false)
@@ -56,8 +55,7 @@ const Auth = () => {
 
         if(submiter == "signin"){
             setVerifyMessage(false)
-             if(signedUpUser){
-                if(signedUpUser.emailVerified){
+
                     firebase.auth().signInWithEmailAndPassword(user.email,user.password)
                     .then(res=>{
                         const currentUser = firebase.auth().currentUser;
@@ -68,17 +66,8 @@ const Auth = () => {
                     .catch(err=>{
                         setUser({...user, signinError:err.message})
                     })
-                 }else{
-                    setVerified("false")
-                    setTimeout(()=>window.location.reload(true), 2000);
-                 }
-             }
-            
-             
-        }
-        
-
-        
+                
+             }     
     }
 
 //Facebook signin handle
@@ -205,13 +194,7 @@ const Auth = () => {
                             </p>
                          : ""
                     }
-                    {
-                         verified==="false" &&
-                            <p style={{color:"red", fontSize:"13px"}}>
-                                Please try again after page refresh!
-                            </p>
-                         
-                    }
+                    
                     {
                         confirmationError ?
                             <p style={{color:"red", fontSize:"13px"}}>
@@ -278,6 +261,6 @@ const Auth = () => {
             </div>
         </div>
     );
-};
+ }
 
 export default Auth;
