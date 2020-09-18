@@ -32,9 +32,15 @@ const Auth = () => {
                 user.password==user.confirmationPassword ?
                 firebase.auth().createUserWithEmailAndPassword(user.email,user.password)
                 .then(res=>{
-                setConfirmationError(false)
-                setUser({...user, signupError:""})
+                    setConfirmationError(false)
+                    setUser({...user, signupError:""})
                     setisSignedUp(true)
+
+                    const currentUser = firebase.auth().currentUser;
+                    currentUser.updateProfile({
+                    displayName: `${user.fname} ${user.lname}`
+                    })
+
                 })
                 .catch(err=>{
                     setUser({...user, signupError:err.message})
@@ -207,13 +213,17 @@ const Auth = () => {
                     ---------- Or -----------
                 </p>
 
-                <div onClick={facebookSigninHandler} className="auth-provider-section">
+                <div onClick={facebookSigninHandler}
+                        style={{cursor:"pointer"}} 
+                        className="auth-provider-section">
                     <img style={{width:"30px", height:"30px", marginRight:"10px"}} src={fb} alt=""/>
                     <p>
                         Continue with Facebook
                     </p>
                 </div>
-                <div onClick={googleSigninHandler} className="auth-provider-section">
+                <div onClick={googleSigninHandler} 
+                        style={{cursor:"pointer"}} 
+                        className="auth-provider-section">
                     <img style={{width:"30px", height:"30px", marginRight:"10px"}} src={google} alt=""/>
                     <p>
                         Continue with Google

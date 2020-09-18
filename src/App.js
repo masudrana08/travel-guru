@@ -13,6 +13,7 @@ import News from './Components/News/News'
 import Blog from './Components/Blog/Blog';
 import Contact from './Components/Contact/Contact';
 import Destination from './Components/Destination/Destination';
+import NotFound from './Components/NotFound/NotFound';
 
 export const MyContext=createContext()
 firebase.initializeApp(firebaseConfig);
@@ -44,15 +45,15 @@ function App() {
           <Home></Home>
         </Route>
 
-        <Route path="/booking">
+        <Route exact path="/booking">
           <Booking></Booking>
         </Route>
 
-        <Route path="/auth">
+        <Route exact path="/auth">
           <Auth></Auth>
         </Route>
 
-        <PrivateRoute path="/see-hotel">
+        <PrivateRoute exact path="/booking/see-hotel">
           <Hotels></Hotels>
         </PrivateRoute>
 
@@ -70,6 +71,11 @@ function App() {
 
         <Route path="/destination">
           <Destination></Destination>
+        </Route>
+
+    {/* Not Found Route */}
+        <Route path="*">
+          <NotFound></NotFound>
         </Route>
 
       </Switch>

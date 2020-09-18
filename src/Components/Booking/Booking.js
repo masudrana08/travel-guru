@@ -46,7 +46,7 @@ const Booking = () => {
 
                 <Grid item xs={12} md={6} >
                     <form className="booking-form" style={
-                                {padding:"7%", margin:"auto",
+                                {padding:"7% 9% 7% 7%", margin:"auto",
                                 marginTop:"50px", width:"340px"}
                                     }
                             onSubmit={formControler}>
@@ -64,13 +64,21 @@ const Booking = () => {
                             <input id="origin" type="text" required/>
 
                             <div className="datepicker-section" style={{display:"flex"}}>
-                                <div>
+                                <div style={{marginRight:"5px"}}>
                                     <p>From</p>
-                                    <DatePicker selected={from} onChange={date => setFrom(date)} required></DatePicker>
+                                    <DatePicker selected={from} 
+                                        className="date-picker"
+                                        onChange={date => setFrom(date)} 
+                                        required
+                                        placeholderText="Peek a date" />
                                 </div>
                                 <div>
                                     <p>To</p>
-                                    <DatePicker selected={to} onChange={date => setTo(date)}required></DatePicker>
+                                    <DatePicker selected={to}
+                                        className="date-picker"
+                                        onChange={date => setTo(date)}
+                                        required
+                                        placeholderText="Peek a date" />
                                 </div>
                             </div>
                                 <input type="submit" value="Start Booking"/>   

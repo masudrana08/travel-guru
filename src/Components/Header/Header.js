@@ -16,7 +16,7 @@ const Header = (props) => {
                 color:`${props.color}`,
                 height:'50px',
                 padding:"5px 20px"  
-                    }}>
+             }}>
            <div>
                 <Link to="/"> 
                     <img style={{height:"40px"}} src={props.img || logo} alt=""/>
@@ -40,7 +40,7 @@ const Header = (props) => {
                 {
                     loggedIn?  
                         <h4 >
-                            <span style={{color:"orange"}}>||</span>
+                            <span style={{color:"orange"}}>| </span>
                             Hello, {name}
                         </h4>
                     : <>
