@@ -8,11 +8,11 @@ import google from '../../images/icon/google.png'
 import * as firebase from "firebase/app";
 import { MyContext } from '../../App';
 import { useHistory, useLocation } from 'react-router-dom';
-import { sendVerification } from './authManager';
 
 
 // Started Auth
 const Auth = () => {
+    const signedUpUser = firebase.auth().currentUser;
 
     const [showArea,setShowArea,loggedIn,setLoggedIn,name, setName]=useContext(MyContext)
 
@@ -22,12 +22,12 @@ const Auth = () => {
     const [user, setUser]=useState({})
     const location=useLocation().location?.pathname
     const history=useHistory()
-    const [verified, setVerified]=useState(true)
-  
+    const [verified, setVerified]=useState("null")
+    const [verifyMessage, setVerifyMessage]=useState(false)
+    
 
     const formHandler=(event)=>{
         event.preventDefault()
-            
 //Signup with email and password
             if(submiter === "signup") {
                 user.password==user.confirmationPassword ?
@@ -36,7 +36,7 @@ const Auth = () => {
                     setConfirmationError(false)
                     setUser({...user, signupError:""})
                     setisSignedUp(true)
-
+                    setVerifyMessage(true)
                     const currentUser = firebase.auth().currentUser;
                     currentUser.updateProfile({
                     displayName: `${user.fname} ${user.lname}`
@@ -52,20 +52,30 @@ const Auth = () => {
         
 
 // Sign in with email and password
-        const signedUpUser = firebase.auth().currentUser;
         
-        submiter === "signin" && signedUpUser?.emailVerified ?
-            firebase.auth().signInWithEmailAndPassword(user.email,user.password)
-            .then(res=>{
-                const currentUser = firebase.auth().currentUser;
-                setName(currentUser.displayName)
-                setLoggedIn(true)
-                history.replace(location || "/")
-            })
-            .catch(err=>{
-                setUser({...user, signinError:err.message})
-            })
-            : setVerified(false)
+
+        if(submiter == "signin"){
+            setVerifyMessage(false)
+             if(signedUpUser){
+                if(signedUpUser.emailVerified){
+                    firebase.auth().signInWithEmailAndPassword(user.email,user.password)
+                    .then(res=>{
+                        const currentUser = firebase.auth().currentUser;
+                        setName(currentUser.displayName)
+                        setLoggedIn(true)
+                        history.replace(location || "/")
+                    })
+                    .catch(err=>{
+                        setUser({...user, signinError:err.message})
+                    })
+                 }else{
+                    setVerified("false")
+                    setTimeout(()=>window.location.reload(true), 2000);
+                 }
+             }
+            
+             
+        }
         
 
         
@@ -127,6 +137,21 @@ const Auth = () => {
             <form onSubmit={formHandler}
             className="form-group auth-form-group"> 
 
+                {
+                        verifyMessage && 
+                            <h5 style={{
+                                textAlign:"center",
+                                width:"200px",
+                                margin:"auto",
+                                padding:"7px",
+                                borderRadius:"30px",
+                                background:"#268b268c",
+                                color:"white"
+                            }}>
+                                Verification mail sent!
+                            </h5>
+                    }
+
                 <FormGroup>
                     {
                         isSignedUp? <h2 style={{textAlign:"left"}}>Login</h2>
@@ -181,9 +206,9 @@ const Auth = () => {
                          : ""
                     }
                     {
-                         !verified &&
+                         verified==="false" &&
                             <p style={{color:"red", fontSize:"13px"}}>
-                                Email Not verified ! Please check your mail.
+                                Please try again after page refresh!
                             </p>
                          
                     }

@@ -41,7 +41,7 @@ const Header = (props) => {
                     loggedIn?  
                         <h4 >
                             <span style={{color:"orange"}}>| </span>
-                            Hello, {name}
+                            Welcome, {name}
                         </h4>
                     : <>
                         <Link style={{textDecoration:"none", color:"white"}} to="/auth">
