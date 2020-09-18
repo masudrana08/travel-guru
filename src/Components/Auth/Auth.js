@@ -8,6 +8,7 @@ import google from '../../images/icon/google.png'
 import * as firebase from "firebase/app";
 import { MyContext } from '../../App';
 import { useHistory, useLocation } from 'react-router-dom';
+import { sendVerification } from './authManager';
 
 
 // Started Auth
@@ -21,8 +22,8 @@ const Auth = () => {
     const [user, setUser]=useState({})
     const location=useLocation().location?.pathname
     const history=useHistory()
-
-
+    const [verified, setVerified]=useState(true)
+  
 
     const formHandler=(event)=>{
         event.preventDefault()
@@ -41,27 +42,32 @@ const Auth = () => {
                     displayName: `${user.fname} ${user.lname}`
                     })
 
+                    currentUser.sendEmailVerification()
                 })
                 .catch(err=>{
                     setUser({...user, signupError:err.message})
                 })
                 : setConfirmationError(true)
-        
             }
         
-    
+
 // Sign in with email and password
-        submiter === "signin" &&
-        firebase.auth().signInWithEmailAndPassword(user.email,user.password)
-        .then(res=>{
-            const currentUser = firebase.auth().currentUser;
-            setName(currentUser.displayName)
-            setLoggedIn(true)
-            history.replace(location || "/")
-        })
-        .catch(err=>{
-            setUser({...user, signinError:err.message})
-        })
+        const signedUpUser = firebase.auth().currentUser;
+        
+        submiter === "signin" && signedUpUser?.emailVerified ?
+            firebase.auth().signInWithEmailAndPassword(user.email,user.password)
+            .then(res=>{
+                const currentUser = firebase.auth().currentUser;
+                setName(currentUser.displayName)
+                setLoggedIn(true)
+                history.replace(location || "/")
+            })
+            .catch(err=>{
+                setUser({...user, signinError:err.message})
+            })
+            : setVerified(false)
+        
+
         
     }
 
@@ -108,6 +114,10 @@ const Auth = () => {
         setUser({...user, signinError:""})
     }
    
+    //Password reset
+    const sendVerification=(email)=>{
+        firebase.auth().sendPasswordResetEmail(email)
+    }
 
 // Returned section of Auth
     return (
@@ -152,7 +162,7 @@ const Auth = () => {
                                         Remember me
                                     </label>
                                 </div>
-                                <p style={{color:"orange", cursor:"pointer"}}>Fogot Password</p>
+                                <p onClick={ ()=>user.email && sendVerification(user.email)} style={{color:"orange", cursor:"pointer"}}>Fogot Password</p>
                             </div>
                     }
 
@@ -169,6 +179,13 @@ const Auth = () => {
                                 {user.signupError}
                             </p>
                          : ""
+                    }
+                    {
+                         !verified &&
+                            <p style={{color:"red", fontSize:"13px"}}>
+                                Email Not verified ! Please check your mail.
+                            </p>
+                         
                     }
                     {
                         confirmationError ?
